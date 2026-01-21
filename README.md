@@ -1,1 +1,1 @@
-# Linux_practice_beginner
+# Devops_projects
