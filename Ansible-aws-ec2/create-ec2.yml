@@ -1,0 +1,21 @@
+---
+- name: Launch EC2 instance
+  amazon.aws.ec2_instance:
+    name: ansible-ec2-demo
+    region: "{{ region }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image_id }}"
+    key_name: "{{ key_name }}"
+    security_groups:
+      - "{{ security_group }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    network:
+      assign_public_ip: true
+    state: running
+    count: 1
+    wait: yes
+  register: ec2_result
+
+- name: Print instance public IP
+  debug:
+    msg: "Public IP = {{ ec2_result.instances[0].public_ip_address }}"

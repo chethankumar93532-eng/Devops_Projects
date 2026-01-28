@@ -1,0 +1,12 @@
+- name: Full AWS EC2 Automation Pipeline
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - vars-lab.yml
+    - vault.yml
+
+  tasks:
+    - import_tasks: create-sg.yml
+    - import_tasks: create-ec2.yml

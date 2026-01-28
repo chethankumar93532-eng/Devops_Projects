@@ -1,0 +1,22 @@
+---
+- name: Create security group
+  amazon.aws.ec2_security_group:
+    name: "{{ security_group }}"
+    description: "Security group created by Ansible"
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_id }}"
+    state: present
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+  register: sg_result
+
+- name: Print Security Group ID
+  debug:
+    var: sg_result.group_id
